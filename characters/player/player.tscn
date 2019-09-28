@@ -1,14 +1,24 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://characters/player/player.gd" type="Script" id=1]
 [ext_resource path="res://gui/GUI.tscn" type="PackedScene" id=2]
-[ext_resource path="res://kenney/PNG/Soldier 1/soldier1_gun.png" type="Texture" id=3]
-[ext_resource path="res://weapons/gun/gun.tscn" type="PackedScene" id=4]
-[ext_resource path="res://characters/health.gd" type="Script" id=5]
+[ext_resource path="res://kenney/PNG/Woman Green/womanGreen_gun.png" type="Texture" id=3]
+[ext_resource path="res://kenney/PNG/Soldier 1/soldier1_gun.png" type="Texture" id=4]
+[ext_resource path="res://weapons/gun/gun.tscn" type="PackedScene" id=5]
+[ext_resource path="res://characters/health.gd" type="Script" id=6]
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 52, 43 )
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": false,
+"name": "1",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": false,
+"name": "0",
+"speed": 0.0
+} ]
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 12.4729
@@ -36,16 +46,17 @@ valign = 1
 [node name="GUI" parent="CanvasLayer" instance=ExtResource( 2 )]
 visible = false
 
-[node name="PlayerSprite" type="Sprite" parent="."]
-texture = SubResource( 1 )
+[node name="PlayerSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 4 )
+animation = "1"
 offset = Vector2( 10, 0 )
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 scale = Vector2( 1.17892, -1.09251 )
 shape = SubResource( 2 )
 
-[node name="Gun" parent="." instance=ExtResource( 4 )]
-position = Vector2( 49.8448, 8.84765 )
+[node name="Gun" parent="." instance=ExtResource( 5 )]
+position = Vector2( 49.8448, 9.79896 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -54,7 +65,7 @@ position = Vector2( 8.56177, 0.713486 )
 shape = SubResource( 3 )
 
 [node name="Health" type="Node" parent="."]
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 drag_margin_h_enabled = false

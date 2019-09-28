@@ -96,7 +96,7 @@ remote func pre_start_game(spawn_points: Dictionary) -> void:
 		#sprite change code goes somewhere here
 		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
 		var player = player_scene.instance()
-		
+		player.chooseCharSprite(playerCount)
 		playerCount += 1
 		
 		player.set_name(str(p_id)) # Use unique ID as node name

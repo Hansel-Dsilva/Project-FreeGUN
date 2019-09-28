@@ -38,3 +38,6 @@ func get_input() -> void:
 
 func _physics_process(delta: float) -> void:
 	get_input()
+	
+func chooseCharSprite(id) -> void:
+	$PlayerSprite.set_animation(str(id))
