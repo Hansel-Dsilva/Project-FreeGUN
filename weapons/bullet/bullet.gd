@@ -7,14 +7,12 @@ func _ready() -> void:
 
 
 #Check the collision of the bullet with objects
-func _on_bullet_body_entered(body: PhysicsBody2D) -> void:
+func _on_bullet_body_entered(body: Node2D) -> void:
 	#Find the collision layer on contact
 	match body.collision_layer:
 		#Player/enemy collision layer
 		1:
 			if self.parent != body:
-#				body.health -= parent.gun_stats[2]
-#				body.health_check()
 				body.get_node("Health").health_check(parent.damage)
 				print(body.get_node("Health").health)
 				self.queue_free()
