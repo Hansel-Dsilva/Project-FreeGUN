@@ -90,10 +90,14 @@ remote func pre_start_game(spawn_points: Dictionary) -> void:
 	get_tree().get_root().get_node("Lobby").hide()
 
 	var player_scene = load("res://characters/player/player_multiplayer.tscn")
+	var playerCount = 0
 
 	for p_id in spawn_points:
+		#sprite change code goes somewhere here
 		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
 		var player = player_scene.instance()
+		
+		playerCount += 1
 		
 		player.set_name(str(p_id)) # Use unique ID as node name
 		player.position=spawn_pos

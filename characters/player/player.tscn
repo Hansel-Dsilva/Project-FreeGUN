@@ -1,16 +1,21 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://characters/player/player.gd" type="Script" id=1]
 [ext_resource path="res://gui/GUI.tscn" type="PackedScene" id=2]
-[ext_resource path="res://graphics/Player.png" type="Texture" id=3]
+[ext_resource path="res://kenney/PNG/Soldier 1/soldier1_gun.png" type="Texture" id=3]
 [ext_resource path="res://weapons/gun/gun.tscn" type="PackedScene" id=4]
 [ext_resource path="res://characters/health.gd" type="Script" id=5]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 29.3281, 28.8452 )
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 52, 43 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 32.1106, 32.283 )
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 12.4729
+height = 11.0288
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 24.8181, 20.5525 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 7
@@ -32,20 +37,21 @@ valign = 1
 visible = false
 
 [node name="PlayerSprite" type="Sprite" parent="."]
-rotation = 1.5708
-texture = ExtResource( 3 )
+texture = SubResource( 1 )
+offset = Vector2( 10, 0 )
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+scale = Vector2( 1.17892, -1.09251 )
+shape = SubResource( 2 )
 
 [node name="Gun" parent="." instance=ExtResource( 4 )]
-position = Vector2( 48, 0 )
+position = Vector2( 49.8448, 8.84765 )
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 2 )
+position = Vector2( 8.56177, 0.713486 )
+shape = SubResource( 3 )
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -53,7 +59,6 @@ script = ExtResource( 5 )
 [node name="Camera2D" type="Camera2D" parent="."]
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
-
 [connection signal="ammo_changed" from="Gun" to="CanvasLayer/GUI/VBoxContainer/HBoxContainer/AmmoCounter" method="_on_Gun_ammo_changed"]
 [connection signal="gun_changed" from="Gun" to="CanvasLayer/GUI/VBoxContainer/HBoxContainer/GunName" method="_on_Gun_gun_changed"]
 [connection signal="area_entered" from="Area2D" to="Gun" method="_on_Area2D_area_entered"]
