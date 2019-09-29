@@ -101,6 +101,7 @@ remote func pre_start_game(spawn_points: Dictionary) -> void:
 		
 		player.set_name(str(p_id)) # Use unique ID as node name
 		player.position=spawn_pos
+		player.spawn = spawn_pos
 		player.set_network_master(p_id) #set unique id as master
 
 		if p_id == get_tree().get_network_unique_id():

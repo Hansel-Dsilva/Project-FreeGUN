@@ -9,4 +9,4 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if level_timer:
-		$"Counter/Panel/Amount".text = str(level_timer.time_left)
+		$"Counter/Panel/Amount".text = str(int(level_timer.time_left))

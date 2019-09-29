@@ -3,6 +3,8 @@ extends Node
 signal health_changed
 #slave var slave_health = 100
 
+signal respawn
+
 var health: int = 100
 
 func _ready() -> void:
@@ -14,4 +16,7 @@ func health_check(change: int) -> void:
 	health -= change
 	emit_signal("health_changed")
 	if self.health <= 0:
-		self.get_parent().queue_free()
+		#self.get_parent().queue_free()
+		emit_signal("respawn")
+		health = 100
+		emit_signal("health_changed")
